@@ -67,10 +67,21 @@ GROUP by judet, localitate
     from Clienti
     GROUP BY judet
 UNION
-    select 'Total','', SUM(vanzari) as Vanzari_Localitate
+    select 'Total', '', SUM(vanzari) as Vanzari_Localitate
     from Clienti
 --8. Să se creeze subtotaluri folosind operatorul UNION, adăugându-se interogării anterioare gruparea şi calcularea 
-  --sumei vânzărilor la nivel de judeţ cea la nivel de localitate.
+--sumei vânzărilor la nivel de judeţ cea la nivel de localitate.
+    SELECT '', judet, '', SUM(vanzari) as Vanzari
+    from Clienti
+    GROUP BY judet
+UNION
+    SELECT '', '', localitate, SUM(vanzari) as Vanzar
+    FROM Clienti
+    GROUP by localitate
+UNION
+    select 'Total', '', '', SUM(vanzari)
+    from Clienti
+
 
 --9. Să se scrie interogarea SQL folosind operatorul ROLLUP, criteriul de grupare fiind doar judeţul.
 --10. Să se scrie interogarea SQL folosind operatorul ROLLUP, criteriile fiind judeţul şi localitatea.
