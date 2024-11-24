@@ -72,23 +72,38 @@ UNION
     SELECT 'Total', '', '', SUM(vanzari) as Vanzar
     FROM Clienti
 --9. Să se scrie interogarea SQL folosind operatorul ROLLUP, criteriul de grupare fiind doar judeţul.
-SELECT COALESCE(judet, 'TOTAL'),
+SELECT COALESCE(judet, 'TOTAL JUDET') as JUDET,
     SUM(vanzari) as Vanzari_Judet
 from Clienti
 GROUP by rollup(judet)
 --10. Să se scrie interogarea SQL folosind operatorul ROLLUP, criteriile fiind judeţul şi localitatea.
-SELECT COALESCE(judet, 'TOTAL'),
-    COALESCE(localitate, 'TOTAL JUDET'),
+SELECT COALESCE(judet, 'TOTAL JUDET') as JUDET,
+    COALESCE(localitate, 'TOTAL LOCALITATE') as LOCALITATE,
     SUM(vanzari) as Vanzari_Judet
 from Clienti
 GROUP by rollup(judet,localitate)
 --11. Să se scrie interogarea SQL folosind operatorul ROLLUP, criteriile fiind judeţul, localitatea şi codul poştal.
-SELECT COALESCE(judet, 'TOTAL'),
-    COALESCE(localitate, 'TOTAL JUDET'),
-    COALESCE(codpostal, 'TOTAL LOCALITATE'),
+SELECT COALESCE(judet, 'TOTAL JUDET') as JUDET,
+    COALESCE(localitate, 'TOTAL LOCALITATE') as LOCALITATE,
+    COALESCE(codpostal, 'TOTAL CODPOSTAL') as CODPOSTAL,
     SUM(vanzari) as Vanzari_Judet
 from Clienti
 GROUP by rollup(judet,localitate,codpostal)
 --12. Să se scrie interogarea SQL folosind operatorul CUBE, criteriul de grupare fiind doar judeţul.
+SELECT COALESCE(judet, 'TOTAL JUDET') as JUDET,
+    SUM(vanzari) as Vanzari_Judet
+from Clienti
+GROUP by CUBE (judet)
 --13. Să se scrie interogarea SQL folosind operatorul CUBE, criteriul de grupare fiind jueţul şi localitatea.
+SELECT COALESCE(judet, 'TOTAL JUDET ') as JUDET,
+    COALESCE(localitate, 'TOTAL LOCALITATE') as LOCALITATE,
+    SUM(vanzari) as Vanzari_Judet
+from Clienti
+GROUP by CUBE(judet,localitate)
 --14. Să se scrie interogarea SQL folosind operatorul CUBE, criteriul de grupare fiind judeţul, localitatea şi codul poştal.
+SELECT COALESCE(judet, 'TOTAL JUDET') as JUDET,
+    COALESCE(localitate, 'TOTAL LOCALITATE') as LOCALITATE,
+    COALESCE(codpostal, 'TOTAL CODPOSTAL') as CODPOSTAL,
+    SUM(vanzari) as Vanzari_Judet
+from Clienti
+GROUP by CUBE(judet,localitate,codpostal)
