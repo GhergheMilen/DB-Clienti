@@ -45,6 +45,9 @@ select judet, SUM(vanzari) as Vanzari_Judet
 from Clienti
 group by judet
 --4. Să se execute gruparea şi calculul sumei vânzărilor la nivel de localitate.
+select localitate, SUM(vanzari) as Vanzari_Localitate
+from Clienti
+group by localitate
 --5. Să se afişeze o sumă totală a vânzărilor tuturor clienţilor.
 --6. Să se execute gruparea şi calculul sumei vânzărilor la nivel de judeţ şi localtate.
 --7. Să se creeze subtotaluri folosind operatorul UNION, calculându-se suma vânzărilor la nivel de judeţ şi suma totală.
