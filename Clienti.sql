@@ -12,17 +12,11 @@ use lab5Tema
 create table Clienti
 (
     codcl int primary key,
-    -- Codul clientului
     dencl varchar(100),
-    -- Denumirea clientului
     judet varchar(50),
-    -- Județ
     localitate varchar(50),
-    -- Localitate
     codpostal varchar(10),
-    -- Cod poștal
     vanzari decimal(10, 2)
-    -- Valoarea vânzărilor
 );
 
 insert into Clienti
@@ -77,12 +71,24 @@ UNION
 UNION
     SELECT 'Total', '', '', SUM(vanzari) as Vanzar
     FROM Clienti
-
-
-
 --9. Să se scrie interogarea SQL folosind operatorul ROLLUP, criteriul de grupare fiind doar judeţul.
+SELECT COALESCE(judet, 'TOTAL'),
+    SUM(vanzari) as Vanzari_Judet
+from Clienti
+GROUP by rollup(judet)
 --10. Să se scrie interogarea SQL folosind operatorul ROLLUP, criteriile fiind judeţul şi localitatea.
+SELECT COALESCE(judet, 'TOTAL'),
+    COALESCE(localitate, 'TOTAL JUDET'),
+    SUM(vanzari) as Vanzari_Judet
+from Clienti
+GROUP by rollup(judet,localitate)
 --11. Să se scrie interogarea SQL folosind operatorul ROLLUP, criteriile fiind judeţul, localitatea şi codul poştal.
+SELECT COALESCE(judet, 'TOTAL'),
+    COALESCE(localitate, 'TOTAL JUDET'),
+    COALESCE(codpostal, 'TOTAL LOCALITATE'),
+    SUM(vanzari) as Vanzari_Judet
+from Clienti
+GROUP by rollup(judet,localitate,codpostal)
 --12. Să se scrie interogarea SQL folosind operatorul CUBE, criteriul de grupare fiind doar judeţul.
 --13. Să se scrie interogarea SQL folosind operatorul CUBE, criteriul de grupare fiind jueţul şi localitatea.
 --14. Să se scrie interogarea SQL folosind operatorul CUBE, criteriul de grupare fiind judeţul, localitatea şi codul poştal.
