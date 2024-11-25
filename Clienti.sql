@@ -1,5 +1,5 @@
-create database lab5Tema
-use lab5Tema
+create database lab4Tema
+use lab4Tema
 
 --Să se creeze tabela Clienţi cu următoarele câmpuri: codcl, dencl, judeţ, localitate,
 --codpostal, vânzări şi să se insereze 18 înregistrări: 6 să fie din judeţul Timiş, 6 din judeţul
